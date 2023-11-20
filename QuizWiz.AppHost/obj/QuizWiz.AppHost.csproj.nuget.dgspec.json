@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\michael\\QuizWiz\\QuizWiz.AppHost\\QuizWiz.AppHost.csproj": {}
+    "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.AppHost\\QuizWiz.AppHost.csproj": {}
   },
   "projects": {
-    "C:\\dev\\michael\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj": {
+    "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\michael\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj",
+        "projectUniqueName": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj",
         "projectName": "QuizWiz.ApiService",
-        "projectPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj",
-        "packagesPath": "C:\\Users\\michael.zhou\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.ApiService\\obj\\",
+        "projectPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj",
+        "packagesPath": "C:\\Users\\Senthil boobies\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ApiService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\michael.zhou\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Senthil boobies\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,16 +27,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\dev\\LocalPackage": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.myfoodbag.co.nz/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\dev\\michael\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj": {
-                "projectPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj"
+              "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj": {
+                "projectPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj"
               }
             }
           }
@@ -49,6 +48,40 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Aspire.Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.0-preview.1.23557.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -72,20 +105,21 @@
         }
       }
     },
-    "C:\\dev\\michael\\QuizWiz\\QuizWiz.AppHost\\QuizWiz.AppHost.csproj": {
+    "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.AppHost\\QuizWiz.AppHost.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\michael\\QuizWiz\\QuizWiz.AppHost\\QuizWiz.AppHost.csproj",
+        "projectUniqueName": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.AppHost\\QuizWiz.AppHost.csproj",
         "projectName": "QuizWiz.AppHost",
-        "projectPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.AppHost\\QuizWiz.AppHost.csproj",
-        "packagesPath": "C:\\Users\\michael.zhou\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.AppHost\\obj\\",
+        "projectPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.AppHost\\QuizWiz.AppHost.csproj",
+        "packagesPath": "C:\\Users\\Senthil boobies\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.AppHost\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\michael.zhou\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Senthil boobies\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -94,19 +128,17 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\dev\\LocalPackage": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.myfoodbag.co.nz/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\dev\\michael\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj": {
-                "projectPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj"
+              "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj": {
+                "projectPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ApiService\\QuizWiz.ApiService.csproj"
               },
-              "C:\\dev\\michael\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj": {
-                "projectPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj"
+              "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj": {
+                "projectPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj"
               }
             }
           }
@@ -146,20 +178,21 @@
         }
       }
     },
-    "C:\\dev\\michael\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj": {
+    "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\michael\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj",
+        "projectUniqueName": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj",
         "projectName": "QuizWiz.ServiceDefaults",
-        "projectPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj",
-        "packagesPath": "C:\\Users\\michael.zhou\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.ServiceDefaults\\obj\\",
+        "projectPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj",
+        "packagesPath": "C:\\Users\\Senthil boobies\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ServiceDefaults\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\michael.zhou\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Senthil boobies\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -168,9 +201,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\dev\\LocalPackage": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.myfoodbag.co.nz/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -244,20 +275,21 @@
         }
       }
     },
-    "C:\\dev\\michael\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj": {
+    "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\michael\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj",
+        "projectUniqueName": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj",
         "projectName": "QuizWiz.Web",
-        "projectPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj",
-        "packagesPath": "C:\\Users\\michael.zhou\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.Web\\obj\\",
+        "projectPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.Web\\QuizWiz.Web.csproj",
+        "packagesPath": "C:\\Users\\Senthil boobies\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\michael.zhou\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Senthil boobies\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -266,16 +298,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\dev\\LocalPackage": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.myfoodbag.co.nz/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\dev\\michael\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj": {
-                "projectPath": "C:\\dev\\michael\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj"
+              "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj": {
+                "projectPath": "C:\\Users\\Senthil boobies\\source\\repos\\QuizWiz\\QuizWiz.ServiceDefaults\\QuizWiz.ServiceDefaults.csproj"
               }
             }
           }
