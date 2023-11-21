@@ -2,13 +2,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34310.174
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizWiz.AppHost", "QuizWiz.AppHost\QuizWiz.AppHost.csproj", "{EC49FA47-C58F-4207-B18B-86421849AE73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.AppHost", "QuizWiz.AppHost\QuizWiz.AppHost.csproj", "{EC49FA47-C58F-4207-B18B-86421849AE73}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.ServiceDefaults", "QuizWiz.ServiceDefaults\QuizWiz.ServiceDefaults.csproj", "{6096DAD2-D733-4376-8368-5323F75DB3CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.ApiService", "QuizWiz.ApiService\QuizWiz.ApiService.csproj", "{A58DD146-36C2-46B6-A1FD-B9A9731E3A06}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Web", "QuizWiz.Web\QuizWiz.Web.csproj", "{AE032722-CA54-4AD9-BCE2-4C88D18B3F0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{7945A55A-6C7F-426C-A608-3FE8896BA7A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{FE7E7269-7A51-4305-91B1-78CA4E6C5D32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{3ED2029C-78C5-4FF7-9439-05A3247EEBB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{345AF81E-74EC-40F6-A0A5-C71B03B13EF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +43,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A58DD146-36C2-46B6-A1FD-B9A9731E3A06} = {FE7E7269-7A51-4305-91B1-78CA4E6C5D32}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B40FD6C-D9B1-4196-BEBC-C84195C12389}
