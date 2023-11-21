@@ -4,7 +4,6 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "*" ]
     types: [ opened, synchronize, reopened, labeled, unlabeled, review_requested, review_dismissed, edited ]
 
 jobs:
