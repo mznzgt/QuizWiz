@@ -19,3 +19,8 @@ jobs:
       # You can test your matrix by printing the current dotnet version
       - name: Display dotnet version
         run: dotnet --version
+
+      - name: Install aspire workload
+        run: dotnet workload install aspire
+      - name: Build
+        run: dotnet build --no-restore
