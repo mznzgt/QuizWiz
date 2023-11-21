@@ -1,36 +1,21 @@
-name: .NET
+name: dotnet package
 
-on:
-  push:
-    branches: [ "*" ]
-  pull_request:
-    branches: [ "*" ]
-    types: [ opened, synchronize, reopened, labeled, unlabeled, review_requested, review_dismissed, edited ]
+on: [push]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '8.x.x' ]
 
     steps:
-      - uses: actions/checkout@v3
-
-    - name: Setup .NET
+      - uses: actions/checkout@v4
+      - name: Setup dotnet ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.x
-
-      - name: Install aspire workload
-        run: dotnet workload install aspire
-
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Configure build configuration
-        run: dotnet buildconfig -c Release
-
-      - name: Build
-        run: dotnet build --no-restore
-
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
+          dotnet-version: ${{ matrix.dotnet-version }}
+      # You can test your matrix by printing the current dotnet version
+      - name: Display dotnet version
+        run: dotnet --version
