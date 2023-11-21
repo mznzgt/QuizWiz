@@ -23,11 +23,11 @@ jobs:
       - name: Install aspire workload
         run: dotnet workload install aspire
 
-      - name: Configure build configuration
-        run: dotnet buildconfig -c Release
-
       - name: Restore dependencies
         run: dotnet restore
+
+      - name: Configure build configuration
+        run: dotnet buildconfig -c Release
 
       - name: Build
         run: dotnet build --no-restore
