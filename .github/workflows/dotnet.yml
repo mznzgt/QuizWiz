@@ -15,13 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install aspire workload
-        run: dotnet workload install aspire
-
-      - name: Setup .NET
+    - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.x
+
+      - name: Install aspire workload
+        run: dotnet workload install aspire
 
       - name: Restore dependencies
         run: dotnet restore
