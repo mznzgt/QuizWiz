@@ -34,6 +34,7 @@ namespace QuizWiz.ApiService
             // Application
 
             // Mediator
+            // Need To Register a class form each project Where we have handlers
             services.AddMediatR(x => x.RegisterServicesFromAssemblies(typeof(QuizGeneratorModule).GetTypeInfo().Assembly));
             return services;
         }
