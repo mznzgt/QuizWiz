@@ -1,0 +1,39 @@
+﻿@page "/login"
+@using Microsoft.AspNetCore.Identity
+
+<PageTitle>Login</PageTitle>
+
+<EditForm Model="@loginModel" OnValidSubmit="@HandleLogin">
+    <div class="text-center mb-4">
+        <h3 style="font-weight:bold">Login</h3>
+    </div>
+
+    <div class="form-group mb-3">
+        <InputText class="form-control col-12" @bind-Value="loginModel.Email" placeholder="email address" />
+    </div>
+
+    <div class="form-group mb-3">
+        <InputText type="password" class="form-control col-12" @bind-Value="loginModel.Password" placeholder="password" />
+    </div>
+
+    <div class="form-group mb-3">
+        <input type="submit" class="form-control col-6 btn btn-primary" value="Log in" />
+        <a href="/signup" class="col-6">Need an account?</a>
+    </div>
+</EditForm>
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+
+    private async Task HandleLogin()
+    {
+        // Implement the logic for logging in the user
+        // Use SignInManager to sign in the user
+    }
+
+    public class LoginModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}
