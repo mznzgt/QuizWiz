@@ -50,11 +50,11 @@ namespace QuizWiz.Persistence.BlobStorage
             {
                 var blobClient = await GetBlobClientAsync(blobName);
 
-                var response = await blobClient.DownloadAsync();
+                var response = await blobClient.DownloadStreamingAsync();
 
-                var blobInfo = response.GetRawResponse();
+                var blobInfo = response.Value.Content;
 
-                return blobInfo.ContentStream;
+                return blobInfo;
             }
             catch (Exception ex)
             {

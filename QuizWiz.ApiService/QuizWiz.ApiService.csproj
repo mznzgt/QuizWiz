@@ -8,11 +8,14 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MediatR" Version="12.2.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
 	</ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application\QuizWiz.Application.QuizGenerator\QuizWiz.Application.QuizGenerator.csproj" />
     <ProjectReference Include="..\Persistence\QuizWiz.Persistence.BlobStorage\QuizWiz.Persistence.BlobStorage.csproj" />
     <ProjectReference Include="..\QuizWiz.ServiceDefaults\QuizWiz.ServiceDefaults.csproj" />
   </ItemGroup>

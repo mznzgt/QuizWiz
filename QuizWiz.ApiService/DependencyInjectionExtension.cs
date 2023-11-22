@@ -1,6 +1,9 @@
 ﻿using Azure.Storage.Blobs;
+using MediatR;
 using QuizWiz.ApiService.Settings;
+using QuizWiz.Application.QuizGenerator;
 using QuizWiz.Persistence.BlobStorage;
+using System.Reflection;
 
 namespace QuizWiz.ApiService
 {
@@ -24,10 +27,14 @@ namespace QuizWiz.ApiService
 
             services.AddSingleton(settings.BlobStorageSettings);
 
+            // Persistence
             // Register BlobServices
-
             services.AddScoped<IBlobService, BlobService>();
 
+            // Application
+
+            // Mediator
+            services.AddMediatR(x => x.RegisterServicesFromAssemblies(typeof(QuizGeneratorModule).GetTypeInfo().Assembly));
             return services;
         }
     }

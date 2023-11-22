@@ -28,6 +28,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizWiz.Persistence.BlobStorage", "Persistence\QuizWiz.Persistence.BlobStorage\QuizWiz.Persistence.BlobStorage.csproj", "{8EC619CE-FA45-4821-AB3C-D0FCF1156582}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D488FC1E-84B8-4840-A2D8-ABFAA2A83141}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizWiz.Application.QuizGenerator", "Application\QuizWiz.Application.QuizGenerator\QuizWiz.Application.QuizGenerator.csproj", "{861B2A9E-047B-4505-A3F4-93B06573B3DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +70,10 @@ Global
 		{8EC619CE-FA45-4821-AB3C-D0FCF1156582}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EC619CE-FA45-4821-AB3C-D0FCF1156582}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EC619CE-FA45-4821-AB3C-D0FCF1156582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{861B2A9E-047B-4505-A3F4-93B06573B3DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{861B2A9E-047B-4505-A3F4-93B06573B3DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{861B2A9E-047B-4505-A3F4-93B06573B3DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{861B2A9E-047B-4505-A3F4-93B06573B3DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +85,8 @@ Global
 		{A1C0EEDA-D35D-40D2-AB25-75E39FBEFE1F} = {7945A55A-6C7F-426C-A608-3FE8896BA7A1}
 		{B5679F66-9A75-4F1A-8353-2EBB4701B88F} = {345AF81E-74EC-40F6-A0A5-C71B03B13EF0}
 		{8EC619CE-FA45-4821-AB3C-D0FCF1156582} = {399E136E-4310-4E64-A830-07AA46A69D88}
+		{D488FC1E-84B8-4840-A2D8-ABFAA2A83141} = {7945A55A-6C7F-426C-A608-3FE8896BA7A1}
+		{861B2A9E-047B-4505-A3F4-93B06573B3DE} = {D488FC1E-84B8-4840-A2D8-ABFAA2A83141}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B40FD6C-D9B1-4196-BEBC-C84195C12389}

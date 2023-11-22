@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using QuizWiz.Application.QuizGenerator.Commands;
+using QuizWiz.Application.QuizGenerator.Queries;
 using QuizWiz.Persistence.BlobStorage;
 
 namespace QuizWiz.ApiService.Controllers
@@ -7,11 +10,11 @@ namespace QuizWiz.ApiService.Controllers
     [Route("api/[controller]")]
     public class BlobController : ControllerBase
     {
-        private readonly IBlobService _blobService;
+        private readonly IMediator _mediator;
 
-        public BlobController(IBlobService blobService)
+        public BlobController(IMediator mediator)
         {
-            _blobService = blobService;
+            _mediator = mediator;
         }
 
         [HttpGet("download/{articleName}")]
@@ -19,10 +22,10 @@ namespace QuizWiz.ApiService.Controllers
         {
             try
             {
-                var stream = await _blobService.DownloadBlobAsync(articleName);
-
+                var query = new GetArticleQuery(articleName);
+                var result = await _mediator.Send(query);
                 // Return the stream as part of the response
-                return File(stream, "application/octet-stream", articleName);
+                return File(result, "application/octet-stream", articleName);
             }
             catch (Exception ex)
             {
@@ -42,16 +45,12 @@ namespace QuizWiz.ApiService.Controllers
                     return BadRequest("File is empty or null");
                 }
 
-                // Generate a unique blob name or use the original file name
-                var blobName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var request = new AddArticleCommand(file.FileName, file.OpenReadStream());
 
-                var fileBytes = StreamToByteArray(file.OpenReadStream());
-
-                // Upload the blob and get the URI
-                var blobUri = _blobService.CreateBlobAsync(fileBytes, file.FileName);
+                var result = await _mediator.Send(request);
 
                 // You can return the URI in the response
-                return Ok(new { BlobUri = blobUri });
+                return Ok(new { BlobUri = result });
             }
             catch (Exception ex)
             {
@@ -61,13 +60,6 @@ namespace QuizWiz.ApiService.Controllers
             }
         }
 
-        private static byte[] StreamToByteArray(Stream stream)
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                stream.CopyTo(memoryStream);
-                return memoryStream.ToArray();
-            }
-        }
+        
     }
 }
