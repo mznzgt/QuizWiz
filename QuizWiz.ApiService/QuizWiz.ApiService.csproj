@@ -7,7 +7,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+	</ItemGroup>
+
   <ItemGroup>
+    <ProjectReference Include="..\Persistence\QuizWiz.Persistence.BlobStorage\QuizWiz.Persistence.BlobStorage.csproj" />
     <ProjectReference Include="..\QuizWiz.ServiceDefaults\QuizWiz.ServiceDefaults.csproj" />
   </ItemGroup>
 
