@@ -19,4 +19,20 @@
 		<ProjectReference Include="..\QuizWiz.ServiceDefaults\QuizWiz.ServiceDefaults.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="MediatR" Version="12.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\QuizWix.Application.Auth\QuizWix.Application.Auth.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\QuizWix.Infrastructure.Data\QuizWix.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\QuizWiz.ServiceDefaults\QuizWiz.ServiceDefaults.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -5,5 +5,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+	
+<ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+  </ItemGroup>
+	
+<ItemGroup>
+  <ProjectReference Include="..\..\Domain\QuizWiz.Domain\QuizWiz.Domain.csproj" />
+</ItemGroup>
 
 </Project>
