@@ -10,6 +10,8 @@ using System.Reflection;
 using System.Security.Claims;
 using QuizWiz.Domain;
 
+using QuizWiz.ApiService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire components.
@@ -17,6 +19,9 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
 
 // Add EfCore
@@ -30,6 +35,9 @@ builder.Services
     .AddEntityFrameworkStores<QuizWixContext>();
 
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.ConfigureDependencyInjection(builder.Configuration);
+
 
 builder.Services.AddSwaggerGen();
 
@@ -73,6 +81,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("/whoami", (ClaimsPrincipal user) => $"Hello, you are {user.Identity.Name}").RequireAuthorization();
 
+app.MapControllers();
 app.MapDefaultEndpoints();
 
 app.Run();
