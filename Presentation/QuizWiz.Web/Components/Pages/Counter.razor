@@ -1,5 +1,9 @@
 ﻿@page "/counter"
 @rendermode InteractiveServer
+@using QuizWiz.Application.SharedModel;
+@using System.Net.Http.Json
+@using QuizWiz.Web.Clients
+@inject OpenApiClient OpenApiClient
 
 <PageTitle>Counters</PageTitle>
 
@@ -9,11 +13,43 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+
+<textarea @bind="userInput" placeholder="Enter text here..."></textarea>
+<input type="file" @ref="inputFile" />
+<button type="button" @onclick="SubmitQuiz">Submit</button>
+
+@if (quizQuestions != null)
+{
+    <div>
+        <h3>Generated Questions</h3>
+        @foreach (var question in quizQuestions)
+        {
+            <p>@question.Question</p>
+            <ul>
+                <li>@question.OptionA</li>
+                <li>@question.OptionB</li>
+                <li>@question.OptionC</li>
+                <li>@question.OptionD</li>
+            </ul>
+        }
+    </div>
+}
+
 @code {
     private int currentCount = 0;
 
     private void IncrementCount()
     {
         currentCount++;
+    }
+
+    private ElementReference inputFile;
+    private string userInput;
+    private List<Quiz> quizQuestions;
+
+    private async Task SubmitQuiz()
+    {
+        var quizResponse = await OpenApiClient.GetQuizAsync(userInput);
+        quizQuestions = quizResponse.Quiz;
     }
 }

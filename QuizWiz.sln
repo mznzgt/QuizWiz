@@ -22,14 +22,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Infrastructure.Open
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{BA3C8D90-8BD8-4927-8134-6608FABA18F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizWiz.Persistence.BlobStorage", "Persistence\QuizWiz.Persistence.BlobStorage\QuizWiz.Persistence.BlobStorage.csproj", "{64045493-0311-4B2D-951D-E81BFDC9D67E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Persistence.BlobStorage", "Persistence\QuizWiz.Persistence.BlobStorage\QuizWiz.Persistence.BlobStorage.csproj", "{64045493-0311-4B2D-951D-E81BFDC9D67E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizWiz.Application.QuizGenerator", "Application\QuizWiz.Application.QuizGenerator\QuizWiz.Application.QuizGenerator.csproj", "{0C8BB001-1B98-4102-ACD4-6FDD1412A460}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Application.QuizGenerator", "Application\QuizWiz.Application.QuizGenerator\QuizWiz.Application.QuizGenerator.csproj", "{0C8BB001-1B98-4102-ACD4-6FDD1412A460}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWix.Application.Auth", "Application\QuizWix.Application.Auth\QuizWix.Application.Auth.csproj", "{5A7B812F-5071-43D3-B939-A8072111AF0D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Domain", "Domain\QuizWiz.Domain\QuizWiz.Domain.csproj", "{9A510DBB-9378-4E85-A14D-9328CC54366C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizWix.Infrastructure.Data", "Infrastructure\QuizWix.Infrastructure.Data\QuizWix.Infrastructure.Data.csproj", "{51EFD679-7864-42F1-9360-AB48875D34B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWix.Infrastructure.Data", "Infrastructure\QuizWix.Infrastructure.Data\QuizWix.Infrastructure.Data.csproj", "{51EFD679-7864-42F1-9360-AB48875D34B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizWiz.Application.SharedModel", "Application\QuizWiz.Application.SharedModel\QuizWiz.Application.SharedModel.csproj", "{F8835755-E033-43F5-B1C4-A41A5E26B4BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +60,14 @@ Global
 		{36F83DD5-C4FC-48F7-BD1C-22879419C797}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36F83DD5-C4FC-48F7-BD1C-22879419C797}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36F83DD5-C4FC-48F7-BD1C-22879419C797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64045493-0311-4B2D-951D-E81BFDC9D67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64045493-0311-4B2D-951D-E81BFDC9D67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64045493-0311-4B2D-951D-E81BFDC9D67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64045493-0311-4B2D-951D-E81BFDC9D67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8BB001-1B98-4102-ACD4-6FDD1412A460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8BB001-1B98-4102-ACD4-6FDD1412A460}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8BB001-1B98-4102-ACD4-6FDD1412A460}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8BB001-1B98-4102-ACD4-6FDD1412A460}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A7B812F-5071-43D3-B939-A8072111AF0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A7B812F-5071-43D3-B939-A8072111AF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A7B812F-5071-43D3-B939-A8072111AF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,14 +80,10 @@ Global
 		{51EFD679-7864-42F1-9360-AB48875D34B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51EFD679-7864-42F1-9360-AB48875D34B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51EFD679-7864-42F1-9360-AB48875D34B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64045493-0311-4B2D-951D-E81BFDC9D67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64045493-0311-4B2D-951D-E81BFDC9D67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64045493-0311-4B2D-951D-E81BFDC9D67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64045493-0311-4B2D-951D-E81BFDC9D67E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C8BB001-1B98-4102-ACD4-6FDD1412A460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C8BB001-1B98-4102-ACD4-6FDD1412A460}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C8BB001-1B98-4102-ACD4-6FDD1412A460}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C8BB001-1B98-4102-ACD4-6FDD1412A460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8835755-E033-43F5-B1C4-A41A5E26B4BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8835755-E033-43F5-B1C4-A41A5E26B4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8835755-E033-43F5-B1C4-A41A5E26B4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8835755-E033-43F5-B1C4-A41A5E26B4BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +99,7 @@ Global
 		{5A7B812F-5071-43D3-B939-A8072111AF0D} = {F06E1D1D-A0EF-487A-8D14-B257F7D2E004}
 		{9A510DBB-9378-4E85-A14D-9328CC54366C} = {D02C0529-F319-4FD7-A080-6ACA72F351D5}
 		{51EFD679-7864-42F1-9360-AB48875D34B1} = {CF4E99D3-1C6A-4919-AFAE-B079947CA95E}
+		{F8835755-E033-43F5-B1C4-A41A5E26B4BC} = {F06E1D1D-A0EF-487A-8D14-B257F7D2E004}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B40FD6C-D9B1-4196-BEBC-C84195C12389}
