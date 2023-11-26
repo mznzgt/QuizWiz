@@ -32,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Domain", "Domain\Qu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWix.Infrastructure.Data", "Infrastructure\QuizWix.Infrastructure.Data\QuizWix.Infrastructure.Data.csproj", "{51EFD679-7864-42F1-9360-AB48875D34B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizWiz.Application.SharedModel", "Application\QuizWiz.Application.SharedModel\QuizWiz.Application.SharedModel.csproj", "{F8835755-E033-43F5-B1C4-A41A5E26B4BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Application.SharedModel", "Application\QuizWiz.Application.SharedModel\QuizWiz.Application.SharedModel.csproj", "{F8835755-E033-43F5-B1C4-A41A5E26B4BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

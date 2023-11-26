@@ -25,22 +25,22 @@ namespace QuizWiz.ApiService.Controllers
         {
             try
             {
-                //var completionOptions = new ChatCompletionsOptions()
-                //{
-                //    MaxTokens = 2048,
-                //    Temperature = 0.7f,
-                //    NucleusSamplingFactor = 0.95f,
-                //    DeploymentName = "gpt-3.5-turbo"
-                //};
+                var completionOptions = new ChatCompletionsOptions()
+                {
+                    MaxTokens = 2048,
+                    Temperature = 0.7f,
+                    NucleusSamplingFactor = 0.95f,
+                    DeploymentName = "gpt-3.5-turbo"
+                };
 
-                //completionOptions.Messages.Add(new ChatMessage(ChatRole.System, ApiServiceConstants.QuizPrompt));
-                //completionOptions.Messages.Add(new ChatMessage(ChatRole.User, userInput));
+                completionOptions.Messages.Add(new ChatMessage(ChatRole.System, ApiServiceConstants.QuizPrompt));
+                completionOptions.Messages.Add(new ChatMessage(ChatRole.User, userInput));
 
-                //var response = await _openAIService.GetChatCompletionsAsync(completionOptions);
+                var response = await _openAIService.GetChatCompletionsAsync(completionOptions);
 
-                //var quizContent = response.Choices.First().Message.Content;
-                //var result = JsonConvert.DeserializeObject<QuizResponse>(quizContent);
-                var result = new QuizResponse();
+                var quizcontent = response.Choices.First().Message.Content;
+                var result = JsonConvert.DeserializeObject<QuizResponse>(quizcontent);
+                
                 return Ok(result);
             }
             catch (Exception ex)

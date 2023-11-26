@@ -1,0 +1,27 @@
+﻿@using QuizWiz.Application.SharedModel
+@inject QuizService QuizService
+@inject NavigationManager NavigationManager
+
+<div class="container mt-5 text-center">
+    <h2 class="mb-4">Quiz Completed!</h2>
+    <div class="p-4 border rounded shadow-sm">
+        <p class="lead">Your final score is <strong>@QuizService.Score</strong> out of <strong>@QuizService.TotalQuestions</strong>.</p>
+        <p class="text-secondary">@GetFeedbackMessage()</p>
+        <button class="btn btn-primary mt-3" @onclick="StartNewQuiz">Start New Quiz</button>
+    </div>
+</div>
+
+@code {
+    private string GetFeedbackMessage()
+    {
+        var percentage = (double)QuizService.Score / QuizService.TotalQuestions;
+        if (percentage >= 0.8) return "Excellent work!";
+        if (percentage >= 0.5) return "Good effort!";
+        return "Keep practicing!";
+    }
+
+    private void StartNewQuiz()
+    {
+        NavigationManager.NavigateTo("/quiz/start");
+    }
+}
