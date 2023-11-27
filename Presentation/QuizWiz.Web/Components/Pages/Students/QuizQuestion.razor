@@ -1,0 +1,32 @@
+﻿@using QuizWiz.Application.SharedModel
+
+<div class="quiz-question my-4">
+    <h4 class="mb-3">@Question.Question</h4>
+    @foreach (var option in Options)
+    {
+        <button class="btn @GetButtonClass(option) m-2">@option</button>
+    }
+</div>
+
+@code {
+    [Parameter] public Quiz Question { get; set; }
+    [Parameter] public EventCallback<string> OnOptionSelected { get; set; }
+
+    private List<string> Options => new List<string> { Question.OptionA, Question.OptionB, Question.OptionC, Question.OptionD };
+    private string SelectedOption { get; set; }
+    private string CorrectOption => Question.CorrectAnswer;
+
+    private void SelectOption(string option)
+    {
+        SelectedOption = option;
+        OnOptionSelected.InvokeAsync(option);
+    }
+
+    private string GetButtonClass(string option)
+    {
+        if (SelectedOption == null) return "btn-outline-primary";
+        return option == SelectedOption
+            ? (option == CorrectOption ? "btn-success" : "btn-danger")
+            : "btn-outline-secondary";
+    }
+}

@@ -13,15 +13,15 @@ public class OpenAIService : IOpenAIService
     private readonly AzureKeyCredential _token;
     private readonly ILogger<OpenAIService> _logger;
     private readonly OpenAIClient _openAIClient;
-    private readonly OpenAIServiceOptions _options;
+    private readonly OpenAIServiceSettings _setting;
 
-    public OpenAIService(ILogger<OpenAIService> logger, IOptions<OpenAIServiceOptions> options)
+    public OpenAIService(ILogger<OpenAIService> logger, IOptions<OpenAIServiceSettings> setting)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _options = options.Value ?? throw new ArgumentNullException(nameof(options));
+        _setting = setting.Value ?? throw new ArgumentNullException(nameof(setting));
 
-        _proxyUrl = new Uri(_options.ProxyUrl + "/v1/api");
-        _token = new AzureKeyCredential(_options.ApiKey + "/" + _options.GitHubAlias);
+        _proxyUrl = new Uri(_setting.ProxyUrl + "/v1/api");
+        _token = new AzureKeyCredential(_setting.ApiKey + "/" + _setting.GitHubAlias);
         _openAIClient = new OpenAIClient(_proxyUrl, _token);
     }
 
@@ -48,7 +48,7 @@ public class OpenAIService : IOpenAIService
     }
 }
 
-public class OpenAIServiceOptions
+public class OpenAIServiceSettings
 {
     public string ProxyUrl { get; set; }
     public string ApiKey { get; set; }

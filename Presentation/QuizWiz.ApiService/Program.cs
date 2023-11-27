@@ -36,6 +36,12 @@ builder.Services
 
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddOpenAIServices(
+    builder.Configuration["ApiServiceSettings:OpenAIServiceSettings:ProxyUrl"],
+    builder.Configuration["ApiServiceSettings:OpenAIServiceSettings:ApiKey"],
+    builder.Configuration["ApiServiceSettings:OpenAIServiceSettings:GitHubAlias"]
+);
+
 builder.Services.ConfigureDependencyInjection(builder.Configuration);
 
 
@@ -54,8 +60,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-await app.CreateRolesAsync(builder.Configuration);
-await app.AddAdminAsync(builder.Configuration);
+//await app.CreateRolesAsync(builder.Configuration);
+//await app.AddAdminAsync(builder.Configuration);
 
 var summaries = new[]
 {

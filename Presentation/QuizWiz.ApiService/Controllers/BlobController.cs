@@ -17,7 +17,7 @@ namespace QuizWiz.ApiService.Controllers
         }
 
         [HttpGet("download/{articleName}")]
-        public async Task<IActionResult> GetArticle(string articleName)
+        public async Task<IActionResult> GetArticleAsync(string articleName)
         {
             try
             {

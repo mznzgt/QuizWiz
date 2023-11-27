@@ -1,5 +1,11 @@
 ﻿@page "/counter"
 @rendermode InteractiveServer
+@using QuizWiz.Application.SharedModel;
+@using System.Net.Http.Json
+@using QuizWiz.Web.Clients
+@using static System.Net.WebRequestMethods
+@inject OpenApiClient OpenApiClient
+@inject HttpClient httpClient
 
 <PageTitle>Counters</PageTitle>
 
@@ -16,4 +22,6 @@
     {
         currentCount++;
     }
+
 }
+
