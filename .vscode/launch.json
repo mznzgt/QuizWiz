@@ -18,7 +18,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build backend",
-            "program": "${workspaceFolder}/Presentation/QuizWiz.AppHost/bin/Debug/net8.0/QuizWiz.ApiService.dll",
+            "program": "${workspaceFolder}/Presentation/QuizWiz.AppHost/bin/Debug/net8.0/QuizWiz.AppHost.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Presentation/QuizWiz.AppHost",
             "stopAtEntry": false,
