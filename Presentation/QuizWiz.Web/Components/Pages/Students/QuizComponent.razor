@@ -1,12 +1,16 @@
 ﻿@inject QuizService QuizService
 @using QuizWiz.Application.SharedModel
+@rendermode InteractiveServer
 
 <div class="container mt-5">
     <h2 class="text-center">Quiz</h2>
-    
+    <div "score-display position-fixed top-0 end-0 bg-light p-2 rounded shadow-sm" style="font-size: 17px; right: 10px; top: 10px;">
+        Score: @QuizService.Score / @QuizService.TotalQuestions
+    </div>
+
     @if (currentQuestion != null)
     {
-        <QuizQuestion Question="currentQuestion" OnOptionSelected="HandleOptionSelected"></QuizQuestion>
+        <QuizQuestion Question="@currentQuestion" OnOptionSelected="@HandleOptionSelected"></QuizQuestion>
     }
     else if (QuizService.QuestionsAnswered >= QuizService.TotalQuestions)
     {
@@ -24,9 +28,16 @@
 
     protected override void OnInitialized()
     {
+        InitializeQuestions();
+        QuizService.InitializeQuiz(questions);
+        LoadNextQuestion();
+    }
+
+    private void InitializeQuestions()
+    {
         questions = new List<Quiz>
-            {
-                new Quiz
+        {
+            new Quiz
                 {
                     Question = "What is the capital of Canada?",
                     OptionA = "Toronto",
@@ -53,10 +64,7 @@
                     OptionD = "Tijuana",
                     CorrectAnswer = "Mexico City"
                 },
-            };
-
-        QuizService.InitializeQuiz(questions);
-        LoadNextQuestion();
+        };
     }
 
     private void LoadNextQuestion()
@@ -71,16 +79,18 @@
         }
     }
 
-    private void HandleOptionSelected(string selectedOption)
+    private async Task HandleOptionSelected(string selectedOption)
     {
         bool isCorrect = selectedOption == currentQuestion.CorrectAnswer;
         QuizService.AnswerQuestion(isCorrect);
+
         StateHasChanged();
 
-        Task.Delay(2000).ContinueWith(_ => 
-        {
-            LoadNextQuestion();
-            StateHasChanged();
-        });
+        await Task.Delay(2000);
+
+        LoadNextQuestion();
+
+        // Update UI for next question
+        StateHasChanged();
     }
 }
