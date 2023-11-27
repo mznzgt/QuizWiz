@@ -15,8 +15,8 @@
         "ghcr.io/devcontainers/features/common-utils:2": {},
         "ghcr.io/devcontainers/features/dotnet:2": {
             "version": "none",
-            "dotnetRuntimeVersions": "7.0",
-            "aspNetCoreRuntimeVersions": "7.0"
+            "dotnetRuntimeVersions": "8.0",
+            "aspNetCoreRuntimeVersions": "8.0"
         }
     },
     "customizations": {
@@ -35,7 +35,7 @@
         8080,
         8081
     ],
-    "postCreateCommand": "dotnet restore",
+    "postCreateCommand": "dotnet workload install microsoft-net-sdk-blazorwebassembly-aot && dotnet workload install aspire && dotnet restore",
     "hostRequirements": {
         "memory": "8gb",
         "cpus": 4
