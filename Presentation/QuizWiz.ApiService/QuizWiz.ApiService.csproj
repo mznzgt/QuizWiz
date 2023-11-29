@@ -18,6 +18,7 @@
 		<ProjectReference Include="..\..\Application\QuizWiz.Application.QuizGenerator\QuizWiz.Application.QuizGenerator.csproj" />
 		<ProjectReference Include="..\..\Application\QuizWiz.Application.SharedModel\QuizWiz.Application.SharedModel.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\QuizWiz.Infrastructure.OpenAI\QuizWiz.Infrastructure.OpenAI.csproj" />
+		<ProjectReference Include="..\..\Persistence\QuizWiz.Persistence.Cosmos\QuizWiz.Persistence.Cosmos.csproj" />
 		<ProjectReference Include="..\QuizWiz.ServiceDefaults\QuizWiz.ServiceDefaults.csproj" />
 	</ItemGroup>
 

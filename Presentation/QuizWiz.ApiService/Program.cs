@@ -1,12 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using QuizWiz.ApiService.Endpoints;
-using QuizWiz.ApiService.Services;
 using QuizWiz.Data.Context;
 using QuizWix.Application.Auth;
-using System;
-using System.Reflection;
 using System.Security.Claims;
 using QuizWiz.Domain;
 
