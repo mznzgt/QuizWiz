@@ -2,6 +2,7 @@ using QuizWiz.Web;
 using QuizWiz.Web.Clients;
 using QuizWiz.Web.Components;
 using QuizWiz.Web.Components.Pages.Students;
+using QuizWiz.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.AddRedisOutputCache("cache");
 builder.Services.AddSingleton<QuizService>();
+builder.Services.AddSingleton<IAuthService, AuthService>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -21,6 +23,10 @@ builder.Services.AddHttpClient<WeatherApiClient>(client=> client.BaseAddress = n
 builder.Services.AddHttpClient<OpenApiClient>(client =>
 {
     client.BaseAddress = new Uri("http://apiservice");
+});
+builder.Services.AddHttpClient("Auth", client =>
+{
+    client.BaseAddress = new Uri("http://apiservice/account");
 });
 
 
