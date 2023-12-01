@@ -32,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Domain", "Domain\Qu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWix.Infrastructure.Data", "Infrastructure\QuizWix.Infrastructure.Data\QuizWix.Infrastructure.Data.csproj", "{51EFD679-7864-42F1-9360-AB48875D34B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Application.SharedModel", "Application\QuizWiz.Application.SharedModel\QuizWiz.Application.SharedModel.csproj", "{F8835755-E033-43F5-B1C4-A41A5E26B4BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Application.SharedModel", "Application\QuizWiz.Application.SharedModel\QuizWiz.Application.SharedModel.csproj", "{34A43DA1-732F-4761-9561-33380F6D1363}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3EE7D59E-819F-40E6-A792-28019909927E}"
 EndProject

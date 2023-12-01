@@ -56,8 +56,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//await app.CreateRolesAsync(builder.Configuration);
-//await app.AddAdminAsync(builder.Configuration);
+await app.CreateRolesAsync(builder.Configuration);
+await app.AddAdminAsync(builder.Configuration);
 
 var summaries = new[]
 {
