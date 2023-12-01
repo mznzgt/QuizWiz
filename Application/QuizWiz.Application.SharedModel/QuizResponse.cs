@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace QuizWiz.Application.SharedModel
 {
     public class QuizResponse
     {
+        [JsonProperty("id")]
+        public Guid Id { get; set; } = Guid.NewGuid();
+        // We can use this as partitionKey
+        public string SubjectDomain { get; set; } = "Computers";
         public string Topic { get; set; }
         public List<Quiz> Quiz { get; set; }
     }
