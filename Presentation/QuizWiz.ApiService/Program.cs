@@ -7,6 +7,7 @@ using System.Security.Claims;
 using QuizWiz.Domain;
 
 using QuizWiz.ApiService;
+using QuizWiz.ApiService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
