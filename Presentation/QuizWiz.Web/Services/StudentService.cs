@@ -30,7 +30,7 @@ namespace QuizWiz.Web.Services
 
             var url = "/api/student/get/quiz/id";
 
-            var response = await httpClient.GetAsync($"{url}?itemId={itemId}&partitionKey={email}");
+            var response = await httpClient.GetAsync($"{url}?itemId={itemId}&email={email}");
 
             return await response.Content.ReadFromJsonAsync<QuizResponse>();
         }

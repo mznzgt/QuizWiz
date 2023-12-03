@@ -32,8 +32,6 @@ builder.Services.AddRazorComponents()
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddHttpClient<WeatherApiClient>(client=> client.BaseAddress = new("http://apiservice"));
-
 builder.Services.AddHttpClient("OpenAI", client =>
 {
     client.BaseAddress = new Uri("http://apiservice");

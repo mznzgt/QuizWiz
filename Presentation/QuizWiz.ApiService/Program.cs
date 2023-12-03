@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Azure.Cosmos.Core;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,10 @@ builder.Services
     .AddUserManager<UserManagerService>()
     .AddDefaultTokenProviders();
 
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["ApiServiceSettings:AuthenticationSettings:Key"]));
+var validIssuer = builder.Configuration["ApiServiceSettings:AuthenticationSettings:ValidIssuer"];
+var validAudience = builder.Configuration["ApiServiceSettings:AuthenticationSettings:ValidAudience"];
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -48,11 +53,11 @@ builder.Services.AddAuthentication(options =>
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["ApiServiceSettings:AuthenticationSettings:Key"])),
+        IssuerSigningKey = key,
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidIssuer = builder.Configuration["ApiServiceSettings:AuthenticationSettings:QuizWizIssuer"],
-        ValidAudience = builder.Configuration["ApiServiceSettings:AuthenticationSettings:QuizWizAudience"]
+        ValidIssuer = validIssuer,
+        ValidAudience = validAudience
     };
 });
 
@@ -142,11 +147,11 @@ app.MapPost("/login", async (UserLoginModel loginModel, UserManagerService userM
         };
         authClaims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["ApiServiceSettings:AuthenticationSettings:Key"]));
+        var authSigningKey = key;
 
         var token = new JwtSecurityToken(
-            issuer: builder.Configuration["ApiServiceSettings:AuthenticationSettings:QuizWizIssuer"],
-            audience: "QuizWizAudience",
+            issuer: validIssuer,
+            audience: validAudience,
             expires: DateTime.Now.AddHours(3),
             claims: authClaims,
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)

@@ -7,7 +7,7 @@
     <div class="p-4 border rounded shadow-sm">
         <p class="lead">Your final score is <strong>@QuizService.Score</strong> out of <strong>@QuizService.TotalQuestions</strong>.</p>
         <p class="text-secondary">@GetFeedbackMessage()</p>
-        <button class="btn btn-primary mt-3" @onclick="StartNewQuiz">Start New Quiz</button>
+        <button class="btn btn-primary mt-3" @onclick="BackToDashboard">Back to dashboard</button>
     </div>
 </div>
 
@@ -20,8 +20,8 @@
         return "Keep practicing!";
     }
 
-    private void StartNewQuiz()
+    private void BackToDashboard()
     {
-        NavigationManager.NavigateTo("/quiz/start");
+        NavigationManager.NavigateTo("/student/dashboard");
     }
 }
