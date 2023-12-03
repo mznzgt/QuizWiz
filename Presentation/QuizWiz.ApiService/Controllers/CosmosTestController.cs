@@ -29,12 +29,12 @@ namespace QuizWiz.ApiService.Controllers
             return Ok(response);
         }
 
-        [HttpGet("get")]
-        public async Task<IActionResult> GetItem()
-        {
-            var response = await _cosmosService.GetItemAsync("Computer");
+        //[HttpGet("get")]
+        //public async Task<IActionResult> GetItem()
+        //{
+        //    //var response = await _cosmosService.GetItemAsync("Computer");
 
-            return Ok(response);
-        }
+        //    //return Ok(response);
+        //}
     }
 }

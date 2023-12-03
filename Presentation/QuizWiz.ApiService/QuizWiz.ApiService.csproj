@@ -6,6 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="MediatR" Version="12.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
@@ -17,7 +24,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Application\QuizWiz.Application.QuizGenerator\QuizWiz.Application.QuizGenerator.csproj" />
-		<ProjectReference Include="..\..\Application\QuizWiz.Application.SharedModel\QuizWiz.Application.SharedModel.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\QuizWiz.Infrastructure.OpenAI\QuizWiz.Infrastructure.OpenAI.csproj" />
 		<ProjectReference Include="..\..\Persistence\QuizWiz.Persistence.Cosmos\QuizWiz.Persistence.Cosmos.csproj" />
 		<ProjectReference Include="..\QuizWiz.ServiceDefaults\QuizWiz.ServiceDefaults.csproj" />
@@ -36,10 +42,6 @@
     <ProjectReference Include="..\..\Application\QuizWix.Application.Auth\QuizWix.Application.Auth.csproj" />
     <ProjectReference Include="..\..\Infrastructure\QuizWix.Infrastructure.Data\QuizWix.Infrastructure.Data.csproj" />
     <ProjectReference Include="..\QuizWiz.ServiceDefaults\QuizWiz.ServiceDefaults.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

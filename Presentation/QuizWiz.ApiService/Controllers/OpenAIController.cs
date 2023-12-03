@@ -7,6 +7,7 @@ using QuizWiz.Application.SharedModel;
 using QuizWiz.Domain.Constants;
 using QuizWiz.Infrastructure.OpenAI;
 using QuizWiz.Persistence.Cosmos;
+using System.Security.Claims;
 
 namespace QuizWiz.ApiService.Controllers
 {
@@ -48,11 +49,19 @@ namespace QuizWiz.ApiService.Controllers
                 var response = await _openAIService.GetChatCompletionsAsync(completionOptions);
 
                 var quizContent = response.Choices.FirstOrDefault().Message.Content;
-                var result = JsonConvert.DeserializeObject<QuizResponse>(quizContent);
+                var quizResult = JsonConvert.DeserializeObject<QuizResponse>(quizContent);
 
-                await _cosmosService.CreateItemAsync(result);
-                
-                return Ok(result);
+                var emailClaim  = User.Identity.Name;
+
+                if (string.IsNullOrEmpty(emailClaim))
+                {
+                    return BadRequest("Email does not exist, try login again");
+                }
+
+                quizResult.Email = emailClaim;
+                await _cosmosService.CreateItemAsync(quizResult);
+
+                return Ok($"Quiz {quizResult.Id} has successfully created!");
             }
             catch (Exception ex)
             {

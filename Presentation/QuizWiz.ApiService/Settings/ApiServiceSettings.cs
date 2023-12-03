@@ -8,6 +8,14 @@ namespace QuizWiz.ApiService.Settings
         public const string SectionName = "ApiServiceSettings";
         public BlobStorageSettings BlobStorageSettings { get; set; }
         public OpenAIServiceSettings OpenAIServiceSettings { get; set; }
+        public AuthenticationSettings AuthenticationSettings { get; set; }
         public CosmosSettings CosmosSettings { get; set; }
+    }
+
+    public class AuthenticationSettings
+    {
+        public string Key { get; set; }
+        public string Authority { get; set; }
+        public string Audience { get; set; }
     }
 }

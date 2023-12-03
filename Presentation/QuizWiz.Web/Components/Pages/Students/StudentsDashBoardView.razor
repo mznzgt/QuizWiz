@@ -7,25 +7,53 @@
 @inject ITokenService TokenService
 @rendermode InteractiveServer
 
-<h3>Student Main View</h3>
+<h3>Student Dashboard</h3>
 
-<button type="button" @onclick="GetQuizAsync">Get Quiz</button>
+<textarea @bind="teacherEmail" placeholder="Enter teacher email here..."></textarea>
+<button type="button" @onclick="GetQuizByEmailAsync">Get Quiz</button>
 
-@if(quizzes != null)
+@if (quizzesResponse != null)
 {
-    <StudentQuizView quizzes="@quizzes" />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var quiz in quizzesResponse)
+            {
+                <tr>
+                    <td>@quiz.Topic</td>
+                    <td>@quiz.Email</td>
+                    <td><button @onclick="() => StartQuiz(quiz.Id.ToString(), quiz.Email)">Start Quiz</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
-@code {
-    private List<Quiz> quizzes;
 
-    private async Task GetQuizAsync()
+@code {
+    private List<CosmosEmailQueryResponse> quizzesResponse;
+    private List<Quiz> quizzes;
+    private string teacherEmail;
+
+    private async Task GetQuizByEmailAsync()
     {
         var token = await TokenService.GetTokenAsync();
-        var quizResult = await StudentService.GetQuizAsync(token);
+        var response = await StudentService.GetQuizByEmailAsync(token, teacherEmail);
+        quizzesResponse = response.ToList();
+    }
+
+    private async Task StartQuiz(string itemId, string email)
+    {
+        var token = await TokenService.GetTokenAsync();
+        var quizResult = await StudentService.GetQuizAsync(token, itemId, email);
 
         QuizStateService.SetQuestions(quizResult.Quiz);
-        quizzes = quizResult.Quiz;
 
         NavigationManager.NavigateTo("/student/quiz");
     }

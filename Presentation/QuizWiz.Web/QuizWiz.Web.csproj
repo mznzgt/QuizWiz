@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Application\QuizWiz.Application.SharedModel\QuizWiz.Application.SharedModel.csproj" />
     <ProjectReference Include="..\..\Domain\QuizWiz.Domain\QuizWiz.Domain.csproj" />
     <ProjectReference Include="..\QuizWiz.ServiceDefaults\QuizWiz.ServiceDefaults.csproj" />
   </ItemGroup>

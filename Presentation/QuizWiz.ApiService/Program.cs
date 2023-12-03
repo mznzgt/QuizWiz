@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using QuizWiz.ApiService.Endpoints;
 using QuizWiz.Data.Context;
 using QuizWix.Application.Auth;
 using System.Security.Claims;
-
 using QuizWiz.ApiService;
 using QuizWiz.ApiService.Services;
-using Microsoft.Extensions.Options;
 using QuizWiz.Domain.Entities;
 using QuizWiz.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +15,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Azure.Cosmos.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,11 +33,8 @@ builder.Services.AddAuthorization();
 builder.Services.AddDbContext<QuizWixContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("QuizWizDb")));
 
-var key = "Q9XvoZzDH3hz548zWYXj0rfaj1ptSpn1XhpnEyPQL/U=";
 builder.Services
     .AddIdentity<User, IdentityRole>()
-    //.AddRoles<IdentityRole>()
-    //.AddRoleManager<RoleManager<IdentityRole>>()
     .AddEntityFrameworkStores<QuizWixContext>()
     .AddUserManager<UserManagerService>()
     .AddDefaultTokenProviders();
@@ -53,11 +48,11 @@ builder.Services.AddAuthentication(options =>
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["ApiServiceSettings:AuthenticationSettings:Key"])),
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidIssuer = "QuizWizIssuer",
-        ValidAudience = "QuizWizAudience"
+        ValidIssuer = builder.Configuration["ApiServiceSettings:AuthenticationSettings:QuizWizIssuer"],
+        ValidAudience = builder.Configuration["ApiServiceSettings:AuthenticationSettings:QuizWizAudience"]
     };
 });
 
@@ -70,14 +65,8 @@ builder.Services.AddOpenAIServices(
 );
 
 builder.Services.ConfigureDependencyInjection(builder.Configuration);
-
-
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddAuthApplicationModule();
-
-// configure timeout
-
 
 var app = builder.Build();
 
@@ -106,13 +95,6 @@ app.UseAuthorization();
 
 await app.CreateRolesAsync(builder.Configuration);
 await app.AddAdminAsync(builder.Configuration);
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-//app.MapGroup("/account").MapIdentityApi<User>();
 
 app.MapPost("/register", async (UserRegisterModel registerModel, UserManagerService userManagerService, RoleManager<IdentityRole> roleManager, ILogger<UserManagerService> logger) =>
 {
@@ -160,10 +142,10 @@ app.MapPost("/login", async (UserLoginModel loginModel, UserManagerService userM
         };
         authClaims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["ApiServiceSettings:AuthenticationSettings:Key"]));
 
         var token = new JwtSecurityToken(
-            issuer: "QuizWizIssuer",
+            issuer: builder.Configuration["ApiServiceSettings:AuthenticationSettings:QuizWizIssuer"],
             audience: "QuizWizAudience",
             expires: DateTime.Now.AddHours(3),
             claims: authClaims,
@@ -187,27 +169,6 @@ app.MapGet("/teacher/dashboard", async (HttpContext context) =>
 })
 .RequireAuthorization(new AuthorizeAttribute { Roles = UserRole.Teacher });
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-}).RequireAuthorization();
-
-app.MapGet("/whoami", (ClaimsPrincipal user) => $"Hello, you are {user.Identity.Name}").RequireAuthorization();
-
 app.MapControllers();
 app.MapDefaultEndpoints();
-
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

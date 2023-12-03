@@ -5,6 +5,13 @@ using QuizWiz.Domain.Models;
 
 namespace QuizWiz.Web.Services
 {
+    public interface IAuthService
+    {
+        Task<LoginResponseModel> LoginAsync(UserLoginModel userLoginModel);
+        Task LogoutAsync();
+        Task<string> RegisterAsync(Register registerModel);
+    }
+
     public class AuthService : IAuthService
     {
         private readonly IHttpClientFactory _httpClientFactory;

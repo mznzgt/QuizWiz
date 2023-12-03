@@ -17,10 +17,19 @@ namespace QuizWiz.ApiService.Controllers
         }
 
         [Authorize(Roles = UserRole.Student)]
-        [HttpGet("get/quiz")]
-        public async Task<IActionResult> GetQuizAsync(string itemId)
+        [HttpGet("get/quiz/id")]
+        public async Task<IActionResult> GetQuizAsync(string itemId, string email)
         {
-            var response = await _cosmosService.GetItemAsync(itemId);
+            var response = await _cosmosService.GetItemAsync(itemId, email);
+
+            return Ok(response);
+        }
+
+        [Authorize(Roles = UserRole.Student)]
+        [HttpGet("get/quiz/email")]
+        public async Task<IActionResult> GetQuizByEmailAsync(string email)
+        {
+            var response = await _cosmosService.GetDocumentsByPartitionKeyAsync(email);
 
             return Ok(response);
         }
