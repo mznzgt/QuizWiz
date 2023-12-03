@@ -20,11 +20,19 @@ namespace QuizWiz.ApiService.Controllers
         {
             var item = new QuizResponse()
             {
-                Topic = "something",
+                Topic = "Computer",
                 Quiz = new List<Quiz>()
             };
 
             var response = await _cosmosService.CreateItemAsync(item);
+
+            return Ok(response);
+        }
+
+        [HttpGet("get")]
+        public async Task<IActionResult> GetItem()
+        {
+            var response = await _cosmosService.GetItemAsync("Computer");
 
             return Ok(response);
         }

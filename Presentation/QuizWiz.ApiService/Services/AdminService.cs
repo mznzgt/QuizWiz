@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using QuizWiz.Domain;
+using QuizWiz.Domain.Entities;
 
 namespace QuizWiz.ApiService.Services
 {

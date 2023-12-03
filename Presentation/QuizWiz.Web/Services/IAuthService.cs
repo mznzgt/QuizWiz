@@ -1,11 +1,12 @@
-﻿using QuizWiz.Web.Model;
+﻿using QuizWiz.Domain.Models;
+using QuizWiz.Web.Model;
 
 namespace QuizWiz.Web.Services
 {
     public interface IAuthService
     {
-        Task<LoginResult> Login(Login loginModel);
-        Task Logout();
-        Task<RegisterResult> Register(Register registerModel);
+        Task<LoginResponseModel> LoginAsync(UserLoginModel userLoginModel);
+        Task LogoutAsync();
+        Task<string> RegisterAsync(Register registerModel);
     }
 }

@@ -24,54 +24,22 @@
 
 @code {
     private Quiz currentQuestion;
-    private List<Quiz> questions;
+    [Parameter] public List<Quiz> Questions { get; set; }
 
     protected override void OnInitialized()
     {
-        InitializeQuestions();
-        QuizService.InitializeQuiz(questions);
-        LoadNextQuestion();
-    }
-
-    private void InitializeQuestions()
-    {
-        questions = new List<Quiz>
+        if (Questions != null && Questions.Any())
         {
-            new Quiz
-                {
-                    Question = "What is the capital of Canada?",
-                    OptionA = "Toronto",
-                    OptionB = "Ottawa",
-                    OptionC = "Montreal",
-                    OptionD = "Vancouver",
-                    CorrectAnswer = "Ottawa"
-                },
-                new Quiz
-                {
-                    Question = "What is the capital of the United States?",
-                    OptionA = "New York",
-                    OptionB = "Washington D.C.",
-                    OptionC = "Los Angeles",
-                    OptionD = "Chicago",
-                    CorrectAnswer = "Washington D.C."
-                },
-                new Quiz
-                {
-                    Question = "What is the capital of Mexico?",
-                    OptionA = "Mexico City",
-                    OptionB = "Guadalajara",
-                    OptionC = "Monterrey",
-                    OptionD = "Tijuana",
-                    CorrectAnswer = "Mexico City"
-                },
-        };
+            QuizService.InitializeQuiz(Questions);
+            LoadNextQuestion();
+        }
     }
 
     private void LoadNextQuestion()
     {
-        if (QuizService.QuestionsAnswered < questions.Count)
+        if (QuizService.QuestionsAnswered < Questions.Count)
         {
-            currentQuestion = questions[QuizService.QuestionsAnswered];
+            currentQuestion = Questions[QuizService.QuestionsAnswered];
         }
         else
         {

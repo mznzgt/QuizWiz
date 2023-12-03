@@ -1,0 +1,34 @@
+﻿@page "/student/dashboard"
+@using QuizWiz.Application.SharedModel
+@using QuizWiz.Web.Services
+@inject NavigationManager NavigationManager
+@inject QuizStateService QuizStateService
+@inject IStudentService StudentService
+@inject ITokenService TokenService
+@rendermode InteractiveServer
+
+<h3>Student Main View</h3>
+
+<button type="button" @onclick="GetQuizAsync">Get Quiz</button>
+
+@if(quizzes != null)
+{
+    <StudentQuizView quizzes="@quizzes" />
+}
+
+@code {
+    private List<Quiz> quizzes;
+
+    private async Task GetQuizAsync()
+    {
+        var token = await TokenService.GetTokenAsync();
+        var quizResult = await StudentService.GetQuizAsync(token);
+
+        QuizStateService.SetQuestions(quizResult.Quiz);
+        quizzes = quizResult.Quiz;
+
+        NavigationManager.NavigateTo("/student/quiz");
+    }
+}
+
+

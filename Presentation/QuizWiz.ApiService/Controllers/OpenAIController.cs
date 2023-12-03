@@ -1,9 +1,12 @@
 ﻿using Azure.AI.OpenAI;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using QuizWiz.ApiService.Settings;
 using QuizWiz.Application.SharedModel;
+using QuizWiz.Domain.Constants;
 using QuizWiz.Infrastructure.OpenAI;
+using QuizWiz.Persistence.Cosmos;
 
 namespace QuizWiz.ApiService.Controllers
 {
@@ -12,14 +15,20 @@ namespace QuizWiz.ApiService.Controllers
     public class OpenAIController : ControllerBase
     {
         private readonly IOpenAIService _openAIService;
+        private readonly ICosmosService _cosmosService;
         private readonly ILogger<OpenAIService> _logger;
 
-        public OpenAIController(IOpenAIService openAIService, ILogger<OpenAIService> logger)
+        public OpenAIController(
+            IOpenAIService openAIService, 
+            ILogger<OpenAIService> logger,
+            ICosmosService cosmosService)
         {
             _openAIService = openAIService;
             _logger = logger;
+            _cosmosService = cosmosService;
         }
 
+        [Authorize(Roles = UserRole.Teacher)]
         [HttpPost("quiz/create")]
         public async Task<ActionResult<QuizResponse>> GetChatCompletionsAsync([FromBody] string userInput)
         {
@@ -38,8 +47,10 @@ namespace QuizWiz.ApiService.Controllers
 
                 var response = await _openAIService.GetChatCompletionsAsync(completionOptions);
 
-                var quizcontent = response.Choices.First().Message.Content;
-                var result = JsonConvert.DeserializeObject<QuizResponse>(quizcontent);
+                var quizContent = response.Choices.FirstOrDefault().Message.Content;
+                var result = JsonConvert.DeserializeObject<QuizResponse>(quizContent);
+
+                await _cosmosService.CreateItemAsync(result);
                 
                 return Ok(result);
             }

@@ -36,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Application.SharedM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3EE7D59E-819F-40E6-A792-28019909927E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizWiz.Persistence.Cosmos", "Persistence\QuizWiz.Persistence.Cosmos\QuizWiz.Persistence.Cosmos.csproj", "{FD5AD315-6F79-4A19-AD11-1559D801C8F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizWiz.Persistence.Cosmos", "Persistence\QuizWiz.Persistence.Cosmos\QuizWiz.Persistence.Cosmos.csproj", "{FD5AD315-6F79-4A19-AD11-1559D801C8F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

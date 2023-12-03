@@ -1,0 +1,48 @@
+﻿@page "/teacher/dashboard"
+@using QuizWiz.Application.SharedModel;
+@using System.Net.Http.Json
+@using QuizWiz.Web.Services
+@inject ITokenService TokenService
+@inject IJwtService JwtService
+@inject IOpenAIService OpenAIService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+<PageTitle>Counters</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+
+<textarea @bind="userInput" placeholder="Enter text here..."></textarea>
+<input type="file" @ref="inputFile" />
+<button type="button" @onclick="SubmitQuiz">Submit</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private ElementReference inputFile;
+    private string userInput;
+    private List<Quiz> quizQuestions;
+
+    private async Task SubmitQuiz()
+    {
+        var token = await TokenService.GetTokenAsync();
+
+        if (string.IsNullOrEmpty(token))
+        {
+            NavigationManager.NavigateTo("/login");
+        };
+
+        var quizResponse = await OpenAIService.GetQuizAsync(userInput, token);
+        quizQuestions = quizResponse.Quiz;
+    }
+}

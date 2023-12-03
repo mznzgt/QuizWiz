@@ -9,7 +9,7 @@ namespace QuizWiz.Application.SharedModel
         [JsonProperty("id")]
         public Guid Id { get; set; } = Guid.NewGuid();
         // We can use this as partitionKey
-        public string SubjectDomain { get; set; } = "Computers";
+        public string SubjectDomain { get; set; } = "Quiz";
         public string Topic { get; set; }
         public List<Quiz> Quiz { get; set; }
     }

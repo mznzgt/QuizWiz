@@ -1,9 +1,18 @@
 ﻿@page "/login"
 @using Microsoft.AspNetCore.Identity
+@using QuizWiz.Domain.Constants
+@using QuizWiz.Domain.Models
+@using QuizWiz.Web.Model
+@using QuizWiz.Web.Services
+@inject ITokenService TokenService
+@inject IAuthService AuthService
+@inject IJwtService JwtService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
 
 <PageTitle>Login</PageTitle>
 
-<EditForm Model="@loginModel" OnValidSubmit="@HandleLogin">
+<EditForm Model="@loginModel" OnValidSubmit="@HandleLoginAsync">
     <div class="text-center mb-4">
         <h3 style="font-weight:bold">Login</h3>
     </div>
@@ -20,15 +29,54 @@
         <input type="submit" class="form-control col-6 btn btn-primary" value="Log in" />
         <a href="/signup" class="col-6">Need an account?</a>
     </div>
+
+    <div class="mb-3">
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> @errorMessage
+            </div>
+        }
+    </div>
 </EditForm>
 
 @code {
-    private LoginModel loginModel = new LoginModel();
+    [SupplyParameterFromForm]
+    private LoginModel loginModel { get; set; }
+    private string errorMessage { get; set; }
 
-    private async Task HandleLogin()
+    protected override void OnInitialized() => loginModel ??= new();
+
+    private async Task HandleLoginAsync()
     {
-        // Implement the logic for logging in the user
-        // Use SignInManager to sign in the user
+        var loginRequest = new UserLoginModel
+            {
+                Email = loginModel.Email,
+                Password = loginModel.Password
+            };
+
+        var loginResponse = await AuthService.LoginAsync(loginRequest);
+
+        if (!string.IsNullOrEmpty(loginResponse.Token))
+        {
+            var token = loginResponse.Token;
+            await TokenService.StoreTokenAsync(token);
+
+            var userRole = JwtService.GetRoleFromToken(token);
+
+            if (userRole == UserRole.Student.ToString())
+            {
+                NavigationManager.NavigateTo("/student/dashboard");
+            }
+            else if (userRole == UserRole.Teacher.ToString())
+            {
+                NavigationManager.NavigateTo("/teacher/dashboard");
+            }
+            else
+            {
+                errorMessage = "Invalid user role";
+            }
+        }
     }
 
     public class LoginModel
