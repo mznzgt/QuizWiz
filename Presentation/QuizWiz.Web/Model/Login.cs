@@ -2,7 +2,7 @@
 
 namespace QuizWiz.Web.Model
 {
-    public class Login
+    public class LoginModel
     {
         [Required]
         public string Email { get; set; }

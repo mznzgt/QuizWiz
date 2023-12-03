@@ -24,4 +24,14 @@ namespace QuizWiz.Web.Components.Pages.Students
             QuestionsAnswered++;
         }
     }
+
+    public class QuizStateService
+    {
+        public List<Quiz> Questions { get; private set; }
+
+        public void SetQuestions(List<Quiz> questions)
+        {
+            Questions = questions;
+        }
+    }
 }

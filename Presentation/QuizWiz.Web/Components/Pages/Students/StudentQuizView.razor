@@ -1,0 +1,9 @@
+﻿@page "/student/quiz"
+@using QuizWiz.Application.SharedModel
+@inject QuizStateService QuizStateService
+
+<QuizComponent Questions="@QuizStateService.Questions" />
+
+@code{
+    [Parameter] public List<Quiz> quizzes { get; set; }
+}
