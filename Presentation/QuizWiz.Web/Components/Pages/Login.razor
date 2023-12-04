@@ -7,12 +7,14 @@
 @inject ITokenService TokenService
 @inject IAuthService AuthService
 @inject IJwtService JwtService
+@inject ErrorHandlerService ErrorHandlerService
 @inject LoadingService LoadingService
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
 <PageTitle>Login</PageTitle>
 
+<ErrorBanner />
 <LoadingSpinner />
 
 @if (!LoadingService.IsLoading)
@@ -58,38 +60,46 @@
 
     private async Task HandleLoginAsync()
     {
-        LoadingService.Show();
-
-        var loginRequest = new UserLoginModel
-            {
-                Email = loginModel.Email,
-                Password = loginModel.Password
-            };
-
-        var loginResponse = await AuthService.LoginAsync(loginRequest);
-
-        if (!string.IsNullOrEmpty(loginResponse.Token))
+        try
         {
-            var token = loginResponse.Token;
-            await TokenService.StoreTokenAsync(token);
+            LoadingService.Show();
 
-            var userRole = JwtService.GetRoleFromToken(token);
+            var loginRequest = new UserLoginModel
+                {
+                    Email = loginModel.Email,
+                    Password = loginModel.Password
+                };
 
-            if (userRole == UserRole.Student.ToString())
-            {
-                NavigationManager.NavigateTo("/student/dashboard");
-            }
-            else if (userRole == UserRole.Teacher.ToString())
-            {
-                NavigationManager.NavigateTo("/teacher/dashboard");
-            }
-            else
-            {
-                errorMessage = "Invalid user role";
-            }
+            var loginResponse = await AuthService.LoginAsync(loginRequest);
 
-            LoadingService.Hide();
+            if (!string.IsNullOrEmpty(loginResponse.Token))
+            {
+                var token = loginResponse.Token;
+                await TokenService.StoreTokenAsync(token);
+
+                var userRole = JwtService.GetRoleFromToken(token);
+
+                if (userRole == UserRole.Student.ToString())
+                {
+                    NavigationManager.NavigateTo("/student/dashboard");
+                }
+                else if (userRole == UserRole.Teacher.ToString())
+                {
+                    NavigationManager.NavigateTo("/teacher/dashboard");
+                }
+                else
+                {
+                    errorMessage = "Invalid user role";
+                }
+
+                LoadingService.Hide();
+            }
         }
+        catch (Exception ex)
+        {
+            ErrorHandlerService.TriggerError($"An error occurred : {ex.Message}. Please try again.");
+        }
+
     }
 
     public class LoginModel

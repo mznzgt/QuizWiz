@@ -6,6 +6,7 @@
 @inject IStudentService StudentService
 @inject ITokenService TokenService
 @inject LoadingService LoadingService
+@inject ErrorHandlerService ErrorHandlerService
 @rendermode InteractiveServer
 
 <h3>Student Dashboard</h3>
@@ -15,6 +16,7 @@
 
 <button type="button" @onclick="LogoutAsync">Logout</button>
 
+<ErrorBanner />
 <LoadingSpinner /> 
 
 @if (!LoadingService.IsLoading && quizzesResponse != null)
@@ -54,6 +56,10 @@
             var response = await StudentService.GetQuizByEmailAsync(token, teacherEmail);
             quizzesResponse = response.ToList();
         }
+        catch (Exception ex)
+        {
+            ErrorHandlerService.TriggerError($"An error occurred : {ex.Message}. Please try again.");
+        }
         finally
         {
             LoadingService.Hide();
@@ -70,6 +76,10 @@
             var quizResult = await StudentService.GetQuizAsync(token, itemId, email);
             QuizStateService.SetQuestions(quizResult.Quiz);
             NavigationManager.NavigateTo("/student/quiz");
+        }
+        catch (Exception ex)
+        {
+            ErrorHandlerService.TriggerError($"An error occurred : {ex.Message}. Please try again.");
         }
         finally
         {

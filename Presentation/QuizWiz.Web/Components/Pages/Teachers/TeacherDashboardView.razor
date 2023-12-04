@@ -5,6 +5,7 @@
 @inject ITokenService TokenService
 @inject IJwtService JwtService
 @inject IOpenAIService OpenAIService
+@inject ErrorHandlerService ErrorHandlerService
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
@@ -12,34 +13,32 @@
 
 <h3>Teacher Dashboard</h3>
 
-<textarea @bind="userInput" placeholder="Enter text here..."></textarea>
+<textarea @bind="userInput" placeholder="Enter topic here..."></textarea>
 <input type="file" @ref="inputFile" />
-<button type="button" @onclick="SubmitQuizAsync">Submit</button>
+<button type="button" @onclick="SubmitQuizAsync">Create Quiz</button>
 <button type="button" @onclick="LogoutAsync">Logout</button>
 
 @code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
-
     private ElementReference inputFile;
     private string userInput;
-    private List<Quiz> quizQuestions;
 
     private async Task SubmitQuizAsync()
     {
-        var token = await TokenService.GetTokenAsync();
-
-        if (string.IsNullOrEmpty(token))
+        try
         {
-            NavigationManager.NavigateTo("/login");
-        };
+            var token = await TokenService.GetTokenAsync();
 
-        var quizResponse = await OpenAIService.GetQuizAsync(userInput, token);
-        quizQuestions = quizResponse.Quiz;
+            if (string.IsNullOrEmpty(token))
+            {
+                NavigationManager.NavigateTo("/login");
+            };
+
+            await OpenAIService.GetQuizAsync(userInput, token);
+        }
+        catch (Exception ex)
+        {
+            ErrorHandlerService.TriggerError($"An error occurred : {ex.Message}. Please try again.");
+        }
     }
 
     private async Task LogoutAsync()

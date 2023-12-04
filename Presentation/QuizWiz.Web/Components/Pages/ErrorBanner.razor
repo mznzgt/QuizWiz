@@ -1,0 +1,35 @@
+﻿@using QuizWiz.Web.Services
+@inject ErrorHandlerService ErrorHandlerService
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger fixed-top text-white text-center py-2" style="background-color: #ff0000; z-index: 1000;">
+        @errorMessage
+    </div>
+
+}
+
+@code {
+    private string errorMessage;
+
+    protected override void OnInitialized()
+    {
+        ErrorHandlerService.OnError += ShowError;
+    }
+
+    private void ShowError(string message)
+    {
+        errorMessage = message;
+        StateHasChanged();
+    }
+
+    private void ClearError()
+    {
+        ErrorHandlerService.ClearError();
+    }
+
+    public void Dispose()
+    {
+        ErrorHandlerService.OnError -= ShowError;
+    }
+}
