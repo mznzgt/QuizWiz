@@ -16,6 +16,8 @@ builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddSingleton<IOpenAIService, OpenAIService>();
 builder.Services.AddSingleton<IStudentService, StudentService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<LoadingService>();
+builder.Services.AddScoped<ErrorHandlerService>();
 
 builder.WebHost.ConfigureKestrel(options =>
 {
@@ -52,6 +54,23 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
+}
+
+// global error handling
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler(errorApp =>
+    {
+        errorApp.Run(async context =>
+        {
+            var errorHandlerService = context.RequestServices.GetService<ErrorHandlerService>();
+            errorHandlerService?.TriggerError("A global error occurred.");
+        });
+    });
+}
+else
+{
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseStaticFiles();

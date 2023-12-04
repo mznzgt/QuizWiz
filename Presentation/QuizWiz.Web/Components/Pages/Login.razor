@@ -7,76 +7,99 @@
 @inject ITokenService TokenService
 @inject IAuthService AuthService
 @inject IJwtService JwtService
+@inject ErrorHandlerService ErrorHandlerService
+@inject LoadingService LoadingService
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
 <PageTitle>Login</PageTitle>
 
-<EditForm Model="@loginModel" OnValidSubmit="@HandleLoginAsync">
-    <div class="text-center mb-4">
-        <h3 style="font-weight:bold">Login</h3>
-    </div>
+<ErrorBanner />
+<LoadingSpinner />
 
-    <div class="form-group mb-3">
-        <InputText class="form-control col-12" @bind-Value="loginModel.Email" placeholder="email address" />
-    </div>
+@if (!LoadingService.IsLoading)
+{
+    <EditForm Model="@loginModel" OnValidSubmit="@HandleLoginAsync">
+        <div class="text-center mb-4">
+            <h3 style="font-weight:bold">Login</h3>
+        </div>
 
-    <div class="form-group mb-3">
-        <InputText type="password" class="form-control col-12" @bind-Value="loginModel.Password" placeholder="password" />
-    </div>
+        <div class="form-group mb-3">
+            <InputText class="form-control col-12" @bind-Value="loginModel.Email" placeholder="email address" />
+        </div>
 
-    <div class="form-group mb-3">
-        <input type="submit" class="form-control col-6 btn btn-primary" value="Log in" />
-        <a href="/signup" class="col-6">Need an account?</a>
-    </div>
+        <div class="form-group mb-3">
+            <InputText type="password" class="form-control col-12" @bind-Value="loginModel.Password" placeholder="password" />
+        </div>
 
-    <div class="mb-3">
-        @if (!string.IsNullOrEmpty(errorMessage))
-        {
-            <div class="alert alert-danger" role="alert">
-                <strong>Error!</strong> @errorMessage
-            </div>
-        }
-    </div>
-</EditForm>
+        <div class="form-group mb-3">
+            <input type="submit" class="form-control col-6 btn btn-primary" value="Log in" />
+            <a href="/signup" class="col-6">Need an account?</a>
+        </div>
+
+        <div class="mb-3">
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-danger" role="alert">
+                    <strong>Error!</strong> @errorMessage
+                </div>
+            }
+        </div>
+    </EditForm>
+}
 
 @code {
     [SupplyParameterFromForm]
     private LoginModel loginModel { get; set; }
     private string errorMessage { get; set; }
 
-    protected override void OnInitialized() => loginModel ??= new();
+    protected override void OnInitialized()
+    {
+        loginModel ??= new();
+    }
 
     private async Task HandleLoginAsync()
     {
-        var loginRequest = new UserLoginModel
-            {
-                Email = loginModel.Email,
-                Password = loginModel.Password
-            };
-
-        var loginResponse = await AuthService.LoginAsync(loginRequest);
-
-        if (!string.IsNullOrEmpty(loginResponse.Token))
+        try
         {
-            var token = loginResponse.Token;
-            await TokenService.StoreTokenAsync(token);
+            LoadingService.Show();
 
-            var userRole = JwtService.GetRoleFromToken(token);
+            var loginRequest = new UserLoginModel
+                {
+                    Email = loginModel.Email,
+                    Password = loginModel.Password
+                };
 
-            if (userRole == UserRole.Student.ToString())
+            var loginResponse = await AuthService.LoginAsync(loginRequest);
+
+            if (!string.IsNullOrEmpty(loginResponse.Token))
             {
-                NavigationManager.NavigateTo("/student/dashboard");
-            }
-            else if (userRole == UserRole.Teacher.ToString())
-            {
-                NavigationManager.NavigateTo("/teacher/dashboard");
-            }
-            else
-            {
-                errorMessage = "Invalid user role";
+                var token = loginResponse.Token;
+                await TokenService.StoreTokenAsync(token);
+
+                var userRole = JwtService.GetRoleFromToken(token);
+
+                if (userRole == UserRole.Student.ToString())
+                {
+                    NavigationManager.NavigateTo("/student/dashboard");
+                }
+                else if (userRole == UserRole.Teacher.ToString())
+                {
+                    NavigationManager.NavigateTo("/teacher/dashboard");
+                }
+                else
+                {
+                    errorMessage = "Invalid user role";
+                }
+
+                LoadingService.Hide();
             }
         }
+        catch (Exception ex)
+        {
+            ErrorHandlerService.TriggerError($"An error occurred : {ex.Message}. Please try again.");
+        }
+
     }
 
     public class LoginModel
