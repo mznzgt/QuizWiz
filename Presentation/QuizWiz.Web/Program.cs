@@ -16,6 +16,7 @@ builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddSingleton<IOpenAIService, OpenAIService>();
 builder.Services.AddSingleton<IStudentService, StudentService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<LoadingService>();
 
 builder.WebHost.ConfigureKestrel(options =>
 {

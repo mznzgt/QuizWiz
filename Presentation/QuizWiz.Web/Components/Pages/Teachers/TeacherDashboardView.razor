@@ -12,13 +12,10 @@
 
 <h3>Teacher Dashboard</h3>
 
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
 <textarea @bind="userInput" placeholder="Enter text here..."></textarea>
 <input type="file" @ref="inputFile" />
-<button type="button" @onclick="SubmitQuiz">Submit</button>
+<button type="button" @onclick="SubmitQuizAsync">Submit</button>
+<button type="button" @onclick="LogoutAsync">Logout</button>
 
 @code {
     private int currentCount = 0;
@@ -32,7 +29,7 @@
     private string userInput;
     private List<Quiz> quizQuestions;
 
-    private async Task SubmitQuiz()
+    private async Task SubmitQuizAsync()
     {
         var token = await TokenService.GetTokenAsync();
 
@@ -43,5 +40,11 @@
 
         var quizResponse = await OpenAIService.GetQuizAsync(userInput, token);
         quizQuestions = quizResponse.Quiz;
+    }
+
+    private async Task LogoutAsync()
+    {
+        await TokenService.ClearTokenAsync();
+        NavigationManager.NavigateTo("/");
     }
 }

@@ -1,5 +1,8 @@
-﻿@inject QuizService QuizService
-@using QuizWiz.Application.SharedModel
+﻿@using QuizWiz.Application.SharedModel
+@using QuizWiz.Web.Services
+@inject QuizService QuizService
+@inject ITokenService TokenService
+@inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
 <div class="container mt-5">
@@ -24,6 +27,8 @@
         <p>Loading...</p>
     }
 </div>
+
+<button type="button" @onclick="LogoutAsync">Logout</button>
 
 @code {
     private Quiz currentQuestion;
@@ -63,5 +68,11 @@
 
         // Update UI for next question
         StateHasChanged();
+    }
+
+    private async Task LogoutAsync()
+    {
+        await TokenService.ClearTokenAsync();
+        NavigationManager.NavigateTo("/");
     }
 }

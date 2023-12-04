@@ -1,0 +1,23 @@
+﻿@using QuizWiz.Web.Services
+@inject LoadingService LoadingService
+
+@if (LoadingService.IsLoading)
+{
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        LoadingService.OnLoadingChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        LoadingService.OnLoadingChanged -= StateHasChanged;
+    }
+}

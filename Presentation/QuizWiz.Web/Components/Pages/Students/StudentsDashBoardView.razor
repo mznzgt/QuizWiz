@@ -5,6 +5,7 @@
 @inject QuizStateService QuizStateService
 @inject IStudentService StudentService
 @inject ITokenService TokenService
+@inject LoadingService LoadingService
 @rendermode InteractiveServer
 
 <h3>Student Dashboard</h3>
@@ -12,7 +13,11 @@
 <textarea @bind="teacherEmail" placeholder="Enter teacher email here..."></textarea>
 <button type="button" @onclick="GetQuizByEmailAsync">Get Quiz</button>
 
-@if (quizzesResponse != null)
+<button type="button" @onclick="LogoutAsync">Logout</button>
+
+<LoadingSpinner /> 
+
+@if (!LoadingService.IsLoading && quizzesResponse != null)
 {
     <table class="table">
         <thead>
@@ -35,7 +40,6 @@
     </table>
 }
 
-
 @code {
     private List<CosmosEmailQueryResponse> quizzesResponse;
     private List<Quiz> quizzes;
@@ -43,20 +47,39 @@
 
     private async Task GetQuizByEmailAsync()
     {
-        var token = await TokenService.GetTokenAsync();
-        var response = await StudentService.GetQuizByEmailAsync(token, teacherEmail);
-        quizzesResponse = response.ToList();
+        LoadingService.Show();
+        try
+        {
+            var token = await TokenService.GetTokenAsync();
+            var response = await StudentService.GetQuizByEmailAsync(token, teacherEmail);
+            quizzesResponse = response.ToList();
+        }
+        finally
+        {
+            LoadingService.Hide();
+        }
+
     }
 
     private async Task StartQuiz(string itemId, string email)
     {
-        var token = await TokenService.GetTokenAsync();
-        var quizResult = await StudentService.GetQuizAsync(token, itemId, email);
+        LoadingService.Show();
+        try
+        {
+            var token = await TokenService.GetTokenAsync();
+            var quizResult = await StudentService.GetQuizAsync(token, itemId, email);
+            QuizStateService.SetQuestions(quizResult.Quiz);
+            NavigationManager.NavigateTo("/student/quiz");
+        }
+        finally
+        {
+            LoadingService.Hide();
+        }
+    }
 
-        QuizStateService.SetQuestions(quizResult.Quiz);
-
-        NavigationManager.NavigateTo("/student/quiz");
+    private async Task LogoutAsync()
+    {
+        await TokenService.ClearTokenAsync();
+        NavigationManager.NavigateTo("/");
     }
 }
-
-
