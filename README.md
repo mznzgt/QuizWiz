@@ -19,7 +19,7 @@ QuizWiz is a simple, cloud-native application utilizing the OpenAI Chat API. It 
 * .NET8 SDK
 * Docker
 
-###Running the Application
+### Running the Application
 1. Open the Solution: Launch Visual Studio 2022 and open the QuizWiz.sln file.
 2. Build the Solution: Use Visual Studio to build the solution, ensuring all dependencies are correctly resolved.
 3. Run the QuizWiz.AppHost Project: This will start the backend and frontend services.
